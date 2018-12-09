@@ -1,0 +1,17 @@
+# Rotation of screen
+sudo vim /boot/config.txt
+--> display_rotate=0
+
+# Update npm
+npm install npm@latest -g
+
+# Config file for screensaver & mouse pointer
+sudo nano ~/.config/lxsession/LXDE-pi/autostart
+-->@unclutter -display :0 -idle 3 -root -noevents
+-->@xset s noblank
+-->@xset s off
+-->@xset -dpms
+sudo nano /etc/lightdm/lightdm.conf
+-->[SeatDefaults]
+-->xserver-command=X -s 0 -dpms
+
