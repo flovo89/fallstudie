@@ -20,7 +20,7 @@
 #include "esp_log.h"
 #include "mqtt_client.h"
 
-#define TOPIC_PATH_IRSENSOR "/topic/magicmirror/irsensor"
+#define TOPIC_PATH_IRSENSOR "/topic/magicmirror/humplant"
 
 static const char *TAG = "IRSENSOR_MQTT";
 
