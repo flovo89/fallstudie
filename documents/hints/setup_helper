@@ -15,3 +15,6 @@ sudo nano /etc/lightdm/lightdm.conf
 -->[SeatDefaults]
 -->xserver-command=X -s 0 -dpms
 
+# Monitor on and off
+tvservice -o	
+tvservice -p && sudo chvt 6 && sudo chvt 7
