@@ -165,7 +165,6 @@ static void wifi_init(void)
 
 static void mqtt_app_start(void)
 {
-	int publishcount = 0;
     	const esp_mqtt_client_config_t mqtt_cfg = 
 	{
         	// .uri = "mqtt://iot.eclipse.org",
@@ -184,15 +183,10 @@ static void mqtt_app_start(void)
 		{//So something happened on the sensor
 			char buf[20];
 			printf(gpioSet ? "irsensor on\n" : "irsensor off\n");
-			if(publishcount >= GPIO_PUBLISHING_TIMEOUT_TOP || !gpioSet)
-			{
-				strcpy(buf, gpioSet ? "irsensor on" : "irsensor off");
-				esp_mqtt_client_publish(client, TOPIC_PATH_IRSENSOR, buf, 0, 0, 0);
-				publishcount = 0;
-			}
+			strcpy(buf, gpioSet ? "irsensor on" : "irsensor off");
+			esp_mqtt_client_publish(client, TOPIC_PATH_IRSENSOR, buf, 0, 0, 0);
 			gpioPublished = gpioSet;		
 		}
-		publishcount++;
 		sleep(1);
 	} 
 }
