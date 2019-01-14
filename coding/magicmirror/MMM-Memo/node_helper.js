@@ -20,9 +20,20 @@ module.exports = NodeHelper.create({
 			var notes = null;
 
 			if(this.fileExists(this.memoFilename)){
-    			var notes = fs.readFileSync(this.memoFilename, 'utf8'));
-			res.send({"status": "success", "item": notes});
-		}),
+				var notes = JSON.parse(fs.readFileSync(this.memoFilename, 'utf8'));
+				res.send({"status": "success", "item": notes});
+			}
+		});
+
+		this.expressApp.post('/AddCompleteNote', (req, res) => {
+
+			var query = url.parse(req.url, true).query;
+			var postfile = req.body;
+
+			fs.writeFileSync(this.memoFilename, JSON.stringify(postfile), 'utf8');
+			res.send({"status": "success"});
+			this.loadMemos();
+		});
 
 		this.expressApp.get('/AddMemo', (req, res) => {
 
