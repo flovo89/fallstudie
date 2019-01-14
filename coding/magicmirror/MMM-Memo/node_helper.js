@@ -14,7 +14,6 @@ const fs = require("fs");
 module.exports = NodeHelper.create({
 	
 	start: function() {
-
 		this.expressApp.get('/GetCompleteNote', (req, res) => {
 
 			var query = url.parse(req.url, true).query;
@@ -32,10 +31,10 @@ module.exports = NodeHelper.create({
 			var memoTitle = query.memoTitle;
 			var item = query.item;
 
-            		if (typeof level === "undefined") {
-                		level = "INFO";
-                		console.log("automatically set level to INFO");
-            		}
+            if (typeof level === "undefined") {
+                level = "INFO";
+                console.log("automatically set level to INFO");
+            }
 
 			if (memoTitle == null && item == null && level == null) {
 				res.send({"status": "failed", "error": "No 'memoTitle', 'level' and 'item' given."});
@@ -106,7 +105,7 @@ module.exports = NodeHelper.create({
 	socketNotificationReceived: function(notification, payload) {
 
 		if(notification === "LOAD_MEMOS"){
-		    	this.memoTitle = payload.memoTitle.toLowerCase();
+		    this.memoTitle = payload.memoTitle.toLowerCase();
 			this.memoMaxItems = payload.memoMaxItems;
 			this.memoFilename = payload.memoFilename;
 			this.loadMemos();
@@ -123,9 +122,8 @@ module.exports = NodeHelper.create({
     		if(this.fileExists(this.memoFilename)){
     			this.memos = JSON.parse(fs.readFileSync(this.memoFilename, 'utf8')).memos;
 
-                	this.sendSocketNotification("INIT", this.memos);
-    		} 
-		else {
+                this.sendSocketNotification("INIT", this.memos);
+    		} else {
     			this.memos = [];
     		}
     	},

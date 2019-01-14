@@ -7,7 +7,7 @@
  *
  */
 
- Module.register('MMM-Notes',{
+ Module.register('MMM-Memo',{
 
 	memos: [],
 
