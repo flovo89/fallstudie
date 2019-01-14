@@ -14,6 +14,17 @@ const fs = require("fs");
 module.exports = NodeHelper.create({
 	
 	start: function() {
+
+		this.expressApp.get('/GetCompleteNote', (req, res) => {
+
+			var query = url.parse(req.url, true).query;
+			var notes = null;
+
+			if(this.fileExists(this.memoFilename)){
+    			var notes = fs.readFileSync(this.memoFilename, 'utf8'));
+			res.send({"status": "success", "item": notes});
+		}),
+
 		this.expressApp.get('/AddMemo', (req, res) => {
 
 			var query = url.parse(req.url, true).query;
