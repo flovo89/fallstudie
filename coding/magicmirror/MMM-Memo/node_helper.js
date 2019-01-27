@@ -20,17 +20,32 @@ module.exports = NodeHelper.create({
 			var notes = null;
 
 			if(this.fileExists(this.memoFilename)){
-				var notes = JSON.parse(fs.readFileSync(this.memoFilename, 'utf8'));
-				res.send({"status": "success", "item": notes});
+				var notes = JSON.parse(fs.readFileSync(this.memoFilename, 'utf8')).memos;
+				res.send(notes);
+			}
+			else
+			{
+				res.send({"file" : "empty"});
 			}
 		});
 
+		this.expressApp.get('/DeleteAllNotes', (req, res) => {
+
+			if(this.fileExists(this.memoFilename)){
+				var fs = require('fs')
+				fs.unlink(this.memoFilename);
+				this.loadMemos();
+			}
+			res.send({"status": "success"});
+		});
+		
+		var bodyParser = require('body-parser');
+		this.expressApp.use(bodyParser.json());
+		this.expressApp.use(bodyParser.urlencoded({extended: false}));
 		this.expressApp.post('/AddCompleteNote', (req, res) => {
 
-			var query = url.parse(req.url, true).query;
-			var postfile = req.body;
-
-			fs.writeFileSync(this.memoFilename, JSON.stringify(postfile), 'utf8');
+			var postfile = JSON.stringify({"memos": req.body});
+			fs.writeFileSync(this.memoFilename, postfile, 'utf8');
 			res.send({"status": "success"});
 			this.loadMemos();
 		});
@@ -132,8 +147,7 @@ module.exports = NodeHelper.create({
 	loadMemos: function(){
     		if(this.fileExists(this.memoFilename)){
     			this.memos = JSON.parse(fs.readFileSync(this.memoFilename, 'utf8')).memos;
-
-                this.sendSocketNotification("INIT", this.memos);
+        	        this.sendSocketNotification("INIT", this.memos);
     		} else {
     			this.memos = [];
     		}
