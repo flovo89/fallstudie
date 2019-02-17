@@ -1,5 +1,6 @@
 package com.example.flo.mirrornotes;
 
+import android.nfc.Tag;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +11,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import org.json.JSONException;
+
+import java.security.InvalidParameterException;
+
+public class MainActivity extends AppCompatActivity implements  IReceptionNotifier {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -34,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    static private Communication communicater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +63,16 @@ public class MainActivity extends AppCompatActivity {
         syncbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                communicater.synchronize();
+            }
+        });
+
+        FloatingActionButton uploadbtn = (FloatingActionButton) findViewById(R.id.btn_upload);
+        uploadbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               // communicater.sendData();
             }
         });
 
@@ -63,11 +80,21 @@ public class MainActivity extends AppCompatActivity {
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                /*Process process;
+                try {
+                    process = Runtime.getRuntime().exec("input keyevent 120");
+                }catch(Exception e)
+                {
+                    Log.e("Screenshot","Exception occured");
+                }*/
             }
         });
 
+        communicater = new Communication(this);
+
+        //TODO: do it cyclic
+        communicater.synchronize();
     }
 
 
@@ -92,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void receptionCallback(String res)
+    {
+        EditText editText = (EditText) findViewById(R.id.section_data);
+
+        //TODO: Show depending on active fragment
+        editText.setText(res);
     }
 
     /**
@@ -124,7 +160,15 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+                textView.setText("TODOs");
+            }
+            else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                textView.setText("Shopping");
+            }
+            else {
+                throw new InvalidParameterException();
+            }
             return rootView;
         }
     }
@@ -149,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
     }
 }
