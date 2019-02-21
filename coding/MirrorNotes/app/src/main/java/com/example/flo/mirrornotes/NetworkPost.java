@@ -4,8 +4,10 @@ import android.os.AsyncTask;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -17,7 +19,6 @@ public class NetworkPost extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... strings) {
 
         String data = strings[0]; //data to post
-        OutputStream out;
         HttpURLConnection conn = null;
 
         try {
@@ -26,16 +27,20 @@ public class NetworkPost extends AsyncTask<String, Void, Void> {
 
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(2000);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
 
-            out = new BufferedOutputStream(conn.getOutputStream());
-
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+            OutputStream out = new BufferedOutputStream(conn.getOutputStream());
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             writer.write(data);
             writer.flush();
             writer.close();
+            out.flush();
             out.close();
 
-            //conn.connect();
+            conn.connect();
+            conn.getResponseCode();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

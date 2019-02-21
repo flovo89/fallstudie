@@ -6,51 +6,49 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Communication implements IReceptionNotifier {
-
-    private NetworkGet networkGet;
-    private NetworkPost networkPost;
 
     private IReceptionNotifier notifier;
 
 
     public Communication(IReceptionNotifier notifier)
     {
-        this.networkGet = new NetworkGet(this);
-        this.networkPost = new NetworkPost();
-
         this.notifier = notifier;
     }
 
     public void synchronize()
     {
-        this.networkGet.execute();
+        NetworkGet networkGet = new NetworkGet(this);
+        networkGet.execute();
     }
-
-    /*public String getNotesWithTitle(String title) throws JSONException
-    {
-        JSONObject obj = new JSONObject(readData);
-        JSONArray arr = new JSONArray(obj);
-
-        StringWriter sw = new StringWriter();
-
-        for(int i = 0; i < arr.length(); i++)
-        {
-            if(arr.getJSONObject(i).getString("memoTitle").equals(title))
-            {
-                sw.append(arr.getJSONObject(i).getString("item"));
-                sw.append("\r\n");
-            }
-        }
-
-        return sw.toString();
-    }*/
 
     public void sendData(String data)
     {
-        //TODO: Back to json
+        NetworkPost networkPost = new NetworkPost();
+
+        String[] str = data.split("\n");
+        JSONArray arr = new JSONArray();
+
+        for(String x : str)
+        {
+            JSONObject o = new JSONObject();
+            String[] a = x.split(",");
+            try {
+                o.put("memoTitle", a[0]);
+                o.put("level", "INFO");
+                o.put("item", a[1]);
+                o.put("timestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(new Date()));
+                arr.put(o);
+            } catch (JSONException e) {
+                System.out.println(e.toString());
+            }
+        }
+
+        networkPost.execute(arr.toString());
     }
 
     @Override
@@ -59,24 +57,20 @@ public class Communication implements IReceptionNotifier {
         try {
             StringWriter sw = new StringWriter();
 
-            String str = res.replace("[","").replace("]", "");
+            JSONArray arr = new JSONArray(res);
 
-            String[] spl = str.split(Pattern.quote("},"));
-
-            for(String x : spl)
+            for(int i = 0; i < arr.length(); i++)
             {
-                //TODO: check if last char }, add if not
-                JSONObject obj = new JSONObject(x);
-
-                sw.append(obj.getString("memoTitle"));
+                JSONObject o = arr.getJSONObject(i);
+                sw.append(o.getString("memoTitle"));
                 sw.append(",");
-                sw.append(obj.getString("item"));
-                sw.append("\r\n");
+                sw.append(o.getString("item"));
+                sw.append("\n");
             }
 
             notifier.receptionCallback(sw.toString());
         } catch(JSONException e) {
-
+            System.out.println(e.toString());
         } catch(Exception e) {
             System.out.println(e.toString());
         }

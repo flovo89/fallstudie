@@ -36,7 +36,6 @@ public class NetworkGet extends AsyncTask<Void, Void, String> {
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(2000);
 
-            // handle the response
             int status = conn.getResponseCode();
             if (status != HttpURLConnection.HTTP_OK) {
                 throw new IOException("Post failed with error code " + status);

@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.io.StringWriter;
 import java.security.InvalidParameterException;
 
 public class MainActivity extends AppCompatActivity implements  IReceptionNotifier {
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    private static EditText todoText;
+    private static EditText shoppingText;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -71,8 +75,24 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
         uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String[] todoStr = todoText.getText().toString().split("\n");
+                String[] shoppingStr = shoppingText.getText().toString().split("\n");
 
-               // communicater.sendData();
+                StringWriter sw = new StringWriter();
+                for(String s : todoStr)
+                {
+                    sw.append("todo,");
+                    sw.append(s);
+                    sw.append("\n");
+                }
+                for(String s : shoppingStr)
+                {
+                    sw.append("shopping,");
+                    sw.append(s);
+                    sw.append("\n");
+                }
+
+                communicater.sendData(sw.toString());
             }
         });
 
@@ -92,9 +112,6 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
         });
 
         communicater = new Communication(this);
-
-        //TODO: do it cyclic
-        communicater.synchronize();
     }
 
 
@@ -124,10 +141,29 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
     @Override
     public void receptionCallback(String res)
     {
-        EditText editText = (EditText) findViewById(R.id.section_data);
+        String[] str = res.split("\n");
 
-        //TODO: Show depending on active fragment
-        editText.setText(res);
+        StringWriter swTodo = new StringWriter();
+        StringWriter swShopping = new StringWriter();
+
+        for(String s : str)
+        {
+            if(s.contains("todo"))
+            {
+                String[] f = s.split(",");
+                swTodo.append(f[1]);
+                swTodo.append("\n");
+            }
+            else if(s.contains("shopping"))
+            {
+                String[] f = s.split(",");
+                swShopping.append(f[1]);
+                swShopping.append("\n");
+            }
+        }
+
+        todoText.setText(swTodo.toString());
+        shoppingText.setText(swShopping.toString());
     }
 
     /**
@@ -162,9 +198,11 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             if(getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                 textView.setText("TODOs");
+                todoText = (EditText) rootView.findViewById(R.id.section_data);
             }
             else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
                 textView.setText("Shopping");
+                shoppingText = (EditText) rootView.findViewById(R.id.section_data);
             }
             else {
                 throw new InvalidParameterException();
