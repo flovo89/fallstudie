@@ -1,8 +1,13 @@
 package com.example.flo.mirrornotes;
 
+import android.Manifest;
+import android.graphics.Bitmap;
 import android.nfc.Tag;
+import android.os.Build;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -23,6 +28,10 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.security.InvalidParameterException;
 
@@ -53,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // For permission to store screenshot
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 00);
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -82,13 +96,25 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
                 for(String s : todoStr)
                 {
                     sw.append("todo,");
-                    sw.append(s);
+                    if(s.isEmpty())
+                    {
+                        sw.append("Write something");
+                    }
+                    else {
+                        sw.append(s);
+                    }
                     sw.append("\n");
                 }
                 for(String s : shoppingStr)
                 {
                     sw.append("shopping,");
-                    sw.append(s);
+                    if(s.isEmpty())
+                    {
+                        sw.append("Write something");
+                    }
+                    else {
+                        sw.append(s);
+                    }
                     sw.append("\n");
                 }
 
@@ -100,14 +126,7 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                /*Process process;
-                try {
-                    process = Runtime.getRuntime().exec("input keyevent 120");
-                }catch(Exception e)
-                {
-                    Log.e("Screenshot","Exception occured");
-                }*/
+                captureScreen();
             }
         });
 
@@ -164,6 +183,25 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
 
         todoText.setText(swTodo.toString());
         shoppingText.setText(swShopping.toString());
+    }
+
+    private void captureScreen() {
+        View v = getWindow().getDecorView().getRootView();
+        v.setDrawingCacheEnabled(true);
+        Bitmap bmp = Bitmap.createBitmap(v.getDrawingCache());
+        v.setDrawingCacheEnabled(false);
+        try {
+            FileOutputStream fos = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES), "SCREEN"
+                    + System.currentTimeMillis() + ".png"));
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
