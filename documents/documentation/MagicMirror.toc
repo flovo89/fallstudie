@@ -1,0 +1,7 @@
+\babel@toc {ngerman}{}
+\contentsline {section}{\numberline {1}Einführung}{3}
+\contentsline {section}{\numberline {2}Zielsetzung}{4}
+\contentsline {section}{\numberline {3}Aufbau}{5}
+\contentsline {subsection}{\numberline {3.1}Auswahl Framework}{5}
+\contentsline {subsection}{\numberline {3.2}Auswahl Hardware}{5}
+\contentsline {subsection}{\numberline {3.3}Auswahl Software}{5}
