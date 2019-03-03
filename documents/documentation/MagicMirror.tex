@@ -7,8 +7,10 @@
 \usepackage[]{inputenc}
 \usepackage[T1]{fontenc}
 
-\usepackage{natbib}
 \usepackage{graphicx}
+
+\usepackage[backend=bibtex,style=trad-plain]{biblatex}
+\bibliography{Bibliography.bib}
 
 % Title Page
 \title{Magic Mirror}
@@ -33,7 +35,7 @@ Mit dem verbauten Bildschirm ergeben sich beinahe unbegrenzte Möglichkeiten um I
 \newpage
 
 \section{Zielsetzung}
-Das erste und am höchsten gewichtete Ziel ist das Erstellen eines fertigen Prototypes. Dies wird in folgenden Teilschritten unterteilt.
+Das erste und am höchsten gewichtete Ziel ist das Erstellen eines fertigen Prototypes. Dies wird in folgende Teilschritte unterteilt.
 \begin{itemize}
 	\item Einfache Anzeigeelemente auf dem Spiegel, wie beispielsweise die Uhrzeit, das Wetter oder einen Kalender
 	\item Energiesparmodus, dabei wird der Bildschirm über einen externen Infrarotsensor ein- und ausgeschalten.
@@ -41,7 +43,15 @@ Das erste und am höchsten gewichtete Ziel ist das Erstellen eines fertigen Proto
 	\item Eine Android Applikation um auf obengenanntes Modul zugreifen zu können.
 	\item Sprachsteuerung welche vom Google Assistant gemacht wird.
 \end{itemize}
-Die genannte Punkte werden schrittweise umgesetzt. Somit hat der letzte Punkt die niedrigste Prio und wird als optional erachtet.
+Die genannte Punkte werden schrittweise umgesetzt. Somit hat der letzte Punkt die niedrigste Priorität und wird als optional erachtet.
+
+\newpage
+
+\section{Ausgangslage}
+Die Idee des Magic Mirror ist bekannt. Es gibt bereits zahlreiche Versionen davon online zum Nachbau. Es gibt Vorschläge für das Spiegelglas, den Bildschirm, die Recheneinheit, sogar wie der Rahmen des Spiegels aufgebaut werden kann. Deshalb ist es grundsätzlich einmal notwendig, in diesem Dschungel von Ideen eine gute Zusammensetzung zu finden.
+\\Sehr prominent tritt dabei ein Open Source Projekt auf, welches sich MagicMirror\textsuperscript{2} nennt.
+\cite{Doe:2009:Online}
+
 
 \newpage
 
@@ -52,6 +62,8 @@ Die genannte Punkte werden schrittweise umgesetzt. Somit hat der letzte Punkt di
 \subsection{Auswahl Software}
 
 \newpage
+
+\printbibliography
 
 
 \end{document}          

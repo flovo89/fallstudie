@@ -1,0 +1,43 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global}
+  \entry{Doe:2009:Online}{online}{}
+    \name{author}{1}{}{%
+      {{hash=DR}{%
+         family={Doe},
+         familyi={D\bibinitperiod},
+         given={Ringo},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DR1}
+    \strng{fullhash}{DR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{This is a test entry of type {@ONLINE}}
+    \verb{url}
+    \verb http://www.test.org/doe/
+    \endverb
+    \field{month}{06}
+    \field{year}{2009}
+  \endentry
+\enddatalist
+\endinput
