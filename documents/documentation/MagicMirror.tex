@@ -8,6 +8,7 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{graphicx}
+\graphicspath{ {./Pictures/} }
 
 \usepackage[backend=bibtex,style=trad-plain]{biblatex}
 \bibliography{Bibliography.bib}
@@ -19,6 +20,7 @@
 \begin{document}
 	
 \maketitle
+\thispagestyle{empty}
 
 \newpage
 
@@ -49,16 +51,94 @@ Die genannte Punkte werden schrittweise umgesetzt. Somit hat der letzte Punkt di
 
 \section{Ausgangslage}
 Die Idee des Magic Mirror ist bekannt. Es gibt bereits zahlreiche Versionen davon online zum Nachbau. Es gibt Vorschläge für das Spiegelglas, den Bildschirm, die Recheneinheit, sogar wie der Rahmen des Spiegels aufgebaut werden kann. Deshalb ist es grundsätzlich einmal notwendig, in diesem Dschungel von Ideen eine gute Zusammensetzung zu finden.
-\\Sehr prominent tritt dabei ein Open Source Projekt auf, welches sich MagicMirror\textsuperscript{2} nennt.
-\cite{Doe:2009:Online}
+\\Sehr prominent tritt dabei ein Opensource Projekt auf, welches sich MagicMirror\textsuperscript{2} nennt
+\cite{MagicMirror:2019:Online}. Es ist das einzig verfügbare Projekt, welches modular aufgebaut ist und zudem von einer grossen Community unterstützt wird.Deshalb muss als erstes der Einsatz dieses Projekts abgewogen werden.
 
+\subsection{Bewertungskriterien Opensource Projekt}
+Um zu evaluieren, ob mit dem Opensource Projekt MagicMirror\textsuperscript{2} weitergearbeitet werden kann oder ein komplett eigenständiger Ansatz gewählt werden muss, werden folgende Bewertungskriterien genauer analysiert:
+\begin{itemize}
+	\item Modularität und Erweiterbarkeit
+	\item Einarbeitungszeit
+	\item Hardwareeinsatz
+\end{itemize}
+Die folgenden drei Unterkapitel behandeln kurz diese Punkte jeweils für das Opensource Projekt, sowie die komplette Eigenentwicklung. Dabei werden Bewertungen angegeben zwischen 1-10, wobei 10 sehr gut ist.
+
+\subsubsection{Modularität und Erweiterbarkeit}
+Die Startseite des Opensource Projekts wirbt bereits mit grosser Modularität. Wie gross diese ist, zeigt sich durch die Liste der bereits implementierten Erweiterungen, welche auch auf dem MagicMirror angezeigt werden können. Bereits mehrere hundert solcher Zusatzmodule können eingebunden werden \cite{MagicMirrorModules:2019:Online}. 
+\\Die Erweiterbarkeit ist ebenfalls gut, da die Einbindung der einzelnen Module über eine zentrale Stelle (eine Konfigurationsdatei) gemacht werden kann. 
+\\Bewertung: 8 $\rightarrow$ keine Informationen wie gut Module getestet wurden
+\\
+\\Bei einer Eigenentwicklung muss von Begin klar die Modularität und Erweiterbarkeit berücksichtigt werden. Dies ist gut machbar, da es beim Designen noch keine weiteren Abhängigkeiten gibt. Jedoch ist dies mit Zusatzaufwand verbunden.
+\\Bewertung: 5 $\rightarrow$ die Modularität zu gewährleisten bedeutet ein grosser Mehraufwand
+
+\subsubsection{Einarbeitungszeit}
+Das Opensource Projekt rühmt sich damit, auch für Leute ohne nennenswerten technischen Hintergrund einsetzbar zu sein. Diese Aussage bestätigt sich, denn innerhalb einer Stunde ist es möglich, das Projekt auf einem vorbereiteten Raspberry Pi (Raspian auf SD Karte) lauffähig zu haben und mit der Grundkonfiguration zu betreiben. Deshalb wird die Einarbeitungszeit als klein eingeschätzt.
+\\Bewertung: 8 $\rightarrow$ da Einarbeitung in Modulbearbeitung noch dazukommt
+\\
+\\Bei der Eigenentwicklung verhält sich die Einarbeitungszeit unterschiedlich je nach verwendeter Methode. Was jedoch sicherlich stark ins Gewicht fällt ist die Konzeptfindung, welche vom Vorwissen abhängt. Dadurch kann die Einarbeitungszeit minimiert werden, jedoch steigt damit sicherlich die Zeit der Konzeptphase.
+\\Bewertung: 6 $\rightarrow$ Konzeptphase kann sehr lange dauern
+
+\subsubsection{Hardwareeinsatz}
+Die verwendete Hardware des Opensource Projekts ist nicht definiert. Das Projekt wurde adaptiert um auf Smartphones und Tablets zu laufen, ist aber auch auf einem Rapberry Pi 2 oder Raspberry Pi 3 verwendbar. Diese Portabilität ist optimal, da in dieser Semesterarbeit eine low-cost Hardwareplatform verwendet werden soll.
+\\Bewertung: 8 $\rightarrow$ da es auf den meisten gängigen Platformen läuft, aber nicht auf allen (z.b. Probleme beim Raspberry Pi 1)
+\\
+\\Bei einer Eigenentwicklung ist der Einsatz der Hardware frei und kann eingeplant werden. Eine low-cost Hardwareplatform zu verwenden stellt kein Problem dar.
+\\Bewertung: 10 $\rightarrow$ Projekt kann auf Hardware angepasst werden
+
+\subsection{Designentscheid}
+Anhand der Bewertung aus den vorangehenden Kapiteln fällt der Entscheid klar zu Gunsten vom Opensource Projekt aus. Das bedeutet, dass als Platform für die Software das MagicMirror\textsuperscript{2} Projekt verwendet wird. Von dieser Grundlage aus, werden die nötigen Anpassungen und Erweiterungen gemacht in den einzelnen Modulen.
 
 \newpage
 
 \section{Aufbau}
+Unter einem Kapitel mit dem Namen Aufbau können mehrere Erwartungshaltungen zutreffen. Zum einen sicherlich der Aufbau des Magic Mirrors aus Sicht der verwendeten Materialien und Baugruppen. Zum anderen, und das ist für diese Semesterarbeit das Relevante, der Aufbau der Software und deren Zusammenspiel mit der Hardware. Um jedoch das erstgenannte nicht komplett aussenvor zu lassen, hier ein Sinnbild wie der Magic Mirror aufgebaut wird. Darauf zu sehen ist der benötigte Bildschirm, das Spionglas und ein Rahmen.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{MagicMirror_Building.png}
+\caption{Bauelemente für den Magic Mirror \cite{MagicMirror:2019:Online}}
+\end{figure}
 
-\subsection{Auswahl Framework}
 \subsection{Auswahl Hardware}
+Die Auswahl der Hardware beinhaltet mehrere Einzelteile. Die folgenden Unterkapitel gehen auf die verschiedenen Teile ein. Zur Veranschaulichung jedoch vorweg eine Übersicht über die Komponenten.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{HardwareOverview.png}
+\caption{Hardware Komponentenübersicht}
+\end{figure}
+
+\subsubsection{Bildschirm}
+Der Bildschirm ist für den Magic Mirror natürlich zentral. Jedoch ist bei der Auswahl nicht besonders viel zu beachten. Bei dieser Semesterarbeit wird ein 24 Zoll LCD Monitor verwendet, der einen DVI Anschluss hat und noch kein HDMI unterstützt. Die Auswahl fällt aufgrund des Projektbudgets auf diesen Monitor. Er war gratis verfügbar und ist nicht weiter in Gebrauch. Allfällige Inkompatibilitäten können durch Adapterkabel (HDMI $\rightarrow$ DVI) gelöst werden. Der Bildschirm wird durch ein Netzgerät mit 230 Volt betrieben.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\textwidth]{MagicMonitor.jpeg}
+	\caption{24" Monitor von Magic}
+\end{figure}
+
+\subsubsection{Hauptrechner}
+Wichtig ist für den Hauptrechner, eine einfache Anbindung an das Heimnetzwerk zu ermöglichen. Weiter muss direkt eine Video Schnittstelle wie HDMI, DVI oder VGA vorhanden sein. Dies funktioniert alles mit einem Raspberry Pi 3 sehr gut, die Netzwerkverbindung sogar auch kabellos mittels Onboard-Wifi Chip. Weiter wird das Opensource Projekt von einer grossen Community auf dem Raspberry Pi eingesetzt, was ein grosser Pluspunkt im Falle von Fragen mit dem Projekt ist. Ein weiterer Pluspunkt des Raspberry Pi's ist die Verfügbarkeit und die tiefen Kosten. Diese Gründe machen ein Raspberry Pi 3 Model B zum Hauptrechner in dieser Semesterarbeit.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\textwidth]{RaspberryPi.jpg}
+	\caption{Raspberry Pi 3 Model B}
+\end{figure}
+
+\subsubsection{Infrarot Präsenzmelder}
+Wie in der Zielsetzung erwähnt, ist es TODO...blablabla
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\textwidth]{InfraredPir.png}
+	\caption{Infrarot Präsenzmelder HC-SR501}
+\end{figure}
+
+\subsubsection{Hilfsrechner}
+
+\subsubsection{WIFI Router}
+
+\subsubsection{Laptop}
+
+\subsubsection{Handy}
+
+
 \subsection{Auswahl Software}
 
 \newpage

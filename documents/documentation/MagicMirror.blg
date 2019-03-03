@@ -18,47 +18,52 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: MagicMirror-blx.bib
 Database file #2: Bibliography.bib
+Warning--string name "march" is undefined
+--line 4 of file Bibliography.bib
+Warning--string name "march" is undefined
+--line 12 of file Bibliography.bib
 Biblatex version: 3.8
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 2 entries,
+You've used 3 entries,
             6268 wiz_defined-function locations,
-            1184 strings with 8692 characters,
-and the built_in function-call counts, 5069 in all, are:
-= -- 217
-> -- 253
-< -- 30
-+ -- 208
-- -- 160
-* -- 237
-:= -- 657
+            1189 strings with 8857 characters,
+and the built_in function-call counts, 8045 in all, are:
+= -- 354
+> -- 320
+< -- 51
++ -- 239
+- -- 184
+* -- 426
+:= -- 868
 add.period$ -- 0
-call.type$ -- 2
-change.case$ -- 9
-chr.to.int$ -- 40
-cite$ -- 2
-duplicate$ -- 436
-empty$ -- 451
-format.name$ -- 52
-if$ -- 992
+call.type$ -- 3
+change.case$ -- 18
+chr.to.int$ -- 34
+cite$ -- 4
+duplicate$ -- 784
+empty$ -- 795
+format.name$ -- 103
+if$ -- 1654
 int.to.chr$ -- 0
-int.to.str$ -- 2
+int.to.str$ -- 4
 missing$ -- 0
-newline$ -- 43
-num.names$ -- 41
-pop$ -- 372
+newline$ -- 62
+num.names$ -- 82
+pop$ -- 702
 preamble$ -- 1
-purify$ -- 11
+purify$ -- 22
 quote$ -- 0
-skip$ -- 220
+skip$ -- 364
 stack$ -- 0
-substring$ -- 281
-swap$ -- 122
-text.length$ -- 41
-text.prefix$ -- 1
+substring$ -- 424
+swap$ -- 219
+text.length$ -- 64
+text.prefix$ -- 2
 top$ -- 1
-type$ -- 56
+type$ -- 90
 warning$ -- 0
-while$ -- 89
+while$ -- 111
 width$ -- 0
-write$ -- 42
+write$ -- 60
+(There were 2 warnings)

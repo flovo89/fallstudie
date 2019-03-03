@@ -17,27 +17,46 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
-  \entry{Doe:2009:Online}{online}{}
+  \entry{MagicMirror:2019:Online}{online}{}
     \name{author}{1}{}{%
-      {{hash=DR}{%
-         family={Doe},
-         familyi={D\bibinitperiod},
-         given={Ringo},
-         giveni={R\bibinitperiod},
+      {{hash=MT}{%
+         family={Michael},
+         familyi={M\bibinitperiod},
+         given={Teeuw},
+         giveni={T\bibinitperiod},
       }}%
     }
-    \strng{namehash}{DR1}
-    \strng{fullhash}{DR1}
+    \strng{namehash}{MT1}
+    \strng{fullhash}{MT1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{D}
-    \field{sortinithash}{D}
-    \field{title}{This is a test entry of type {@ONLINE}}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{MagicMirror Opensource Project}
     \verb{url}
-    \verb http://www.test.org/doe/
+    \verb https://magicmirror.builders/
     \endverb
-    \field{month}{06}
-    \field{year}{2009}
+    \field{year}{2019}
+  \endentry
+
+  \entry{MagicMirrorModules:2019:Online}{online}{}
+    \name{author}{1}{}{%
+      {{hash=V}{%
+         family={Various},
+         familyi={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{V1}
+    \strng{fullhash}{V1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \field{title}{MagicMirror Modules}
+    \verb{url}
+    \verb https://github.com/MichMich/MagicMirror/wiki/3rd-party-modules
+    \endverb
+    \field{year}{2019}
   \endentry
 \enddatalist
 \endinput

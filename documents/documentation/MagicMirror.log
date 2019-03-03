@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.25)  3 MAR 2019 09:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.25)  3 MAR 2019 19:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -373,18 +373,18 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (./MagicMirror.aux)
 \openout1 = `MagicMirror.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -432,56 +432,102 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'MagicMirror.bbl' found.
 
 (./MagicMirror.bbl)
-Package biblatex Info: Reference section=0 on input line 19.
-Package biblatex Info: Reference segment=0 on input line 19.
+Package biblatex Info: Reference section=0 on input line 20.
+Package biblatex Info: Reference segment=0 on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 21.
+(Font)              <12> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 21.
+(Font)              <8> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 21.
+(Font)              <6> on input line 22.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./MagicMirror.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 12.
+(Font)              <10.95> on input line 10.
 )
 \tf@toc=\write5
 \openout5 = `MagicMirror.toc'.
 
  [2] [3]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 40.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 42.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 42.
  [4]
-Overfull \hbox (24.61552pt too wide) in paragraph at lines 51--54
-\T1/cmr/m/n/10.95 Sehr pro-mi-nent tritt da-bei ein Open Sour-ce Pro-jekt auf, 
+Overfull \hbox (20.44098pt too wide) in paragraph at lines 53--56
+\T1/cmr/m/n/10.95 Sehr pro-mi-nent tritt da-bei ein Open-sour-ce Pro-jekt auf, 
 wel-ches sich MagicMirror$[]$
  []
 
-[5] [6]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 66.
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--73
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--80
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 82--87
+
+ []
+
+[6]
+<./Pictures/MagicMirror_Building.png, id=29, 1097.09875pt x 668.4975pt>
+File: ./Pictures/MagicMirror_Building.png Graphic file (type png)
+<use ./Pictures/MagicMirror_Building.png>
+Package pdftex.def Info: ./Pictures/MagicMirror_Building.png  used on input lin
+e 97.
+(pdftex.def)             Requested size: 143.9978pt x 87.73395pt.
+<./Pictures/HardwareOverview.png, id=30, 684.5575pt x 640.3925pt>
+File: ./Pictures/HardwareOverview.png Graphic file (type png)
+<use ./Pictures/HardwareOverview.png>
+Package pdftex.def Info: ./Pictures/HardwareOverview.png  used on input line 10
+5.
+(pdftex.def)             Requested size: 216.0022pt x 202.06671pt.
+<./Pictures/MagicMonitor.jpeg, id=32, 629.35126pt x 629.35126pt>
+File: ./Pictures/MagicMonitor.jpeg Graphic file (type jpg)
+<use ./Pictures/MagicMonitor.jpeg>
+Package pdftex.def Info: ./Pictures/MagicMonitor.jpeg  used on input line 113.
+(pdftex.def)             Requested size: 108.0011pt x 107.99661pt.
+ [7 <./Pictures/MagicMirror_Building.png> <./Pictures/HardwareOverview.png>]
+<./Pictures/RaspberryPi.jpg, id=38, 722.7pt x 722.7pt>
+File: ./Pictures/RaspberryPi.jpg Graphic file (type jpg)
+<use ./Pictures/RaspberryPi.jpg>
+Package pdftex.def Info: ./Pictures/RaspberryPi.jpg  used on input line 121.
+(pdftex.def)             Requested size: 108.0011pt x 107.9923pt.
+<./Pictures/InfraredPir.png, id=39, 430.60875pt x 395.4775pt>
+File: ./Pictures/InfraredPir.png Graphic file (type png)
+<use ./Pictures/InfraredPir.png>
+Package pdftex.def Info: ./Pictures/InfraredPir.png  used on input line 129.
+(pdftex.def)             Requested size: 108.0011pt x 99.18895pt.
+[8 <./Pictures/MagicMonitor.jpeg> <./Pictures/RaspberryPi.jpg>] [9 <./Pictures/
+InfraredPir.png>]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 146.
+
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [7]
-(./MagicMirror.aux)
+)
+[10] (./MagicMirror.aux)
 Package logreq Info: Writing requests to 'MagicMirror.run.xml'.
 \openout1 = `MagicMirror.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 8960 strings out of 492982
- 154643 string characters out of 6134896
- 417605 words of memory out of 5000000
- 12413 multiletter control sequences out of 15000+600000
+ 8997 strings out of 492982
+ 155655 string characters out of 6134896
+ 420622 words of memory out of 5000000
+ 12441 multiletter control sequences out of 15000+600000
  14449 words of font info for 36 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
- 39i,6n,45p,831b,1637s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,6n,45p,831b,1637s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/
 type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-supe
@@ -491,10 +537,10 @@ ype1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super
 /sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/
 share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/ty
 pe1/public/cm-super/sftt1095.pfb>
-Output written on MagicMirror.pdf (7 pages, 149183 bytes).
+Output written on MagicMirror.pdf (10 pages, 949314 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 85 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
