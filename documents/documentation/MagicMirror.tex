@@ -39,7 +39,7 @@ Mit dem verbauten Bildschirm ergeben sich beinahe unbegrenzte Möglichkeiten um I
 \section{Zielsetzung}
 Das erste und am höchsten gewichtete Ziel ist das Erstellen eines fertigen Prototypes. Dies wird in folgende Teilschritte unterteilt.
 \begin{itemize}
-	\item Einfache Anzeigeelemente auf dem Spiegel, wie beispielsweise die Uhrzeit, das Wetter oder einen Kalender
+	\item Einfache Anzeigeelemente auf dem Spiegel, wie beispielsweise die Uhrzeit, das Wetter oder einen Kalender.
 	\item Energiesparmodus, dabei wird der Bildschirm über einen externen Infrarotsensor ein- und ausgeschalten.
 	\item Modul auf welches über mobile Applikation zugegriffen werden kann.
 	\item Eine Android Applikation um auf obengenanntes Modul zugreifen zu können.
@@ -52,10 +52,10 @@ Die genannte Punkte werden schrittweise umgesetzt. Somit hat der letzte Punkt di
 \section{Ausgangslage}
 Die Idee des Magic Mirror ist bekannt. Es gibt bereits zahlreiche Versionen davon online zum Nachbau. Es gibt Vorschläge für das Spiegelglas, den Bildschirm, die Recheneinheit, sogar wie der Rahmen des Spiegels aufgebaut werden kann. Deshalb ist es grundsätzlich einmal notwendig, in diesem Dschungel von Ideen eine gute Zusammensetzung zu finden.
 \\Sehr prominent tritt dabei ein Opensource Projekt auf, welches sich MagicMirror\textsuperscript{2} nennt
-\cite{MagicMirror:2019:Online}. Es ist das einzig verfügbare Projekt, welches modular aufgebaut ist und zudem von einer grossen Community unterstützt wird.Deshalb muss als erstes der Einsatz dieses Projekts abgewogen werden.
+\cite{MagicMirror:2019:Online}. Es ist das einzig verfügbare Projekt, welches modular aufgebaut ist und zudem von einer grossen Community unterstützt wird. Deshalb muss als erstes der Einsatz dieses Projekts abgewogen werden.
 
 \subsection{Bewertungskriterien Opensource Projekt}
-Um zu evaluieren, ob mit dem Opensource Projekt MagicMirror\textsuperscript{2} weitergearbeitet werden kann oder ein komplett eigenständiger Ansatz gewählt werden muss, werden folgende Bewertungskriterien genauer analysiert:
+Um zu evaluieren, ob mit dem Opensource ProjMein Standortekt MagicMirror\textsuperscript{2} weitergearbeitet werden kann oder ein komplett eigenständiger Ansatz gewählt werden muss, werden folgende Bewertungskriterien genauer analysiert:
 \begin{itemize}
 	\item Modularität und Erweiterbarkeit
 	\item Einarbeitungszeit
@@ -64,12 +64,12 @@ Um zu evaluieren, ob mit dem Opensource Projekt MagicMirror\textsuperscript{2} w
 Die folgenden drei Unterkapitel behandeln kurz diese Punkte jeweils für das Opensource Projekt, sowie die komplette Eigenentwicklung. Dabei werden Bewertungen angegeben zwischen 1-10, wobei 10 sehr gut ist.
 
 \subsubsection{Modularität und Erweiterbarkeit}
-Die Startseite des Opensource Projekts wirbt bereits mit grosser Modularität. Wie gross diese ist, zeigt sich durch die Liste der bereits implementierten Erweiterungen, welche auch auf dem MagicMirror angezeigt werden können. Bereits mehrere hundert solcher Zusatzmodule können eingebunden werden \cite{MagicMirrorModules:2019:Online}. 
+Die Startseite des Opensource Projekts wirbt bereits mit grosser Modularität. Wie gross diese ist, zeigt sich durch die Liste der bereits implementierten Erweiterungen, welche auch auf dem Magic Mirror angezeigt werden können. Bereits mehrere hundert solcher Zusatzmodule können eingebunden werden \cite{MagicMirrorModules:2019:Online}. 
 \\Die Erweiterbarkeit ist ebenfalls gut, da die Einbindung der einzelnen Module über eine zentrale Stelle (eine Konfigurationsdatei) gemacht werden kann. 
-\\Bewertung: 8 $\rightarrow$ keine Informationen wie gut Module getestet wurden
+\\Bewertung: 8 $\rightarrow$ keine Informationen darüber, wie gut Module getestet wurden
 \\
 \\Bei einer Eigenentwicklung muss von Begin klar die Modularität und Erweiterbarkeit berücksichtigt werden. Dies ist gut machbar, da es beim Designen noch keine weiteren Abhängigkeiten gibt. Jedoch ist dies mit Zusatzaufwand verbunden.
-\\Bewertung: 5 $\rightarrow$ die Modularität zu gewährleisten bedeutet ein grosser Mehraufwand
+\\Bewertung: 5 $\rightarrow$ die Modularität zu gewährleisten bedeutet aber ein grosser Mehraufwand
 
 \subsubsection{Einarbeitungszeit}
 Das Opensource Projekt rühmt sich damit, auch für Leute ohne nennenswerten technischen Hintergrund einsetzbar zu sein. Diese Aussage bestätigt sich, denn innerhalb einer Stunde ist es möglich, das Projekt auf einem vorbereiteten Raspberry Pi (Raspian auf SD Karte) lauffähig zu haben und mit der Grundkonfiguration zu betreiben. Deshalb wird die Einarbeitungszeit als klein eingeschätzt.
@@ -123,23 +123,57 @@ Wichtig ist für den Hauptrechner, eine einfache Anbindung an das Heimnetzwerk zu
 \end{figure}
 
 \subsubsection{Infrarot Präsenzmelder}
-Wie in der Zielsetzung erwähnt, ist es TODO...blablabla
+Wie in der Zielsetzung erwähnt, soll der Magic Mirror möglichst Energieeffizient sein. Der grösste Energieverbrauch liegt sicherlich beim Betreiben des Monitors. Deshalb soll dieser automatisch ausschalten, wenn niemand zu Hause ist. Diese Detektion kann mit einem Infrarot Präsenzmelder gemacht werden. Aus Kostengründen wird der HC-SR501 eingesetzt. Dieser bietet die Möglichkeit, über ein Potentiometer die Sensitivität einzustellen um eine optimale Anpassung an den Einsatzraum zu gewährleisten. 
+\\Der Melder funktioniert ab einer Speisespannung von 3.3V. Bei einer Detektion wird ein Puls am Ausgangspin generiert.
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.3\textwidth]{InfraredPir.png}
+	\includegraphics[width=0.2\textwidth]{InfraredPir.png}
 	\caption{Infrarot Präsenzmelder HC-SR501}
 \end{figure}
 
 \subsubsection{Hilfsrechner}
+Um den erwähnten Puls vom Infrarot Präsenzmelder zu verarbeiten und einen Befehl an den Magic Mirror zu senden, muss noch eine weitere Recheneinheit vorhanden sein. Natürlich könnte auch das Raspberry Pi diese Aufgabe übernehmen. Jedoch müsste dann der Präsenzmelder direkt über ein Kabel verbunden sein mit dem Magic Mirror. Dies ist nicht wünschenswert, da der Präsenzmelder entfernt vom Magic Mirror aufgestellt soll, um Bewegungen im Raum zu erkennen bevor der Betrachter den Magic Mirror sieht. Damit bleibt genügend Zeit um den Bildschirm zu starten und der Betrachter findet den aktiven Magic Mirror vor.
+\\Diese Aufgabe der Verarbeitung von einem Puls erfordert keine aufwändigen Berechnungen. Wichtig ist aber, dass der Hilfsrechner eine Möglichkeit hat ins Netzwerk zu kommen um mit dem Magic Mirror zu kommunizieren. Der ESP32 erfüllt diese Anforderung sehr gut, da er einen Wifi Chip integriert. Weiter ist das Board sehr kostengünstig erwerbbar. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.2\textwidth]{Esp32.png}
+	\caption{ESP32 Board mit Microcontroller und Wifi}
+\end{figure}
 
 \subsubsection{WIFI Router}
+Die Kommunikation soll in einem Heimnetz funktionieren, wobei eine Verbindung zum Internet bestehen muss, um alle Funktionalitäten des Magic Mirrors ausschöpfen zu können. Da beispielsweise der Infrarot Präsenzmelder nicht kabelgebunden installiert werden soll, muss ein wireless Netz vorhanden sein, sprich WIFI. Es kann auch ein Hotspot von einem mobilen Gerät erstellt werden um das Netz herzustellen. Der Magic Mirror, wie auch der Infrarot Präsenzmelder verbinden sich jedoch auf eine fix eingestellte SSID.
 
 \subsubsection{Laptop}
+Der Laptop im System wird verwendet um Konfigurationen des Magic Mirror zu ändern. Der Vorgang ist so, dass eine SSH Verbindung zum Raspberry Pi aufgebaut wird, wo die Konfiguration angepasst werden kann.
 
 \subsubsection{Handy}
-
+Eine Android Applikation wird gebaut, um mit dem Magic Mirror interagieren zu können. Mindestens die Version Android Kitkat 4.4 wird dafür benötigt. Dies ist bei Geräten neuer als 2013 standardmässig gegeben und dadurch wird eine grosse Unterstützung erreicht.
 
 \subsection{Auswahl Software}
+Auf verschiedenen Teilen im System läuft unterschiedliche Software. Die Eigenentwicklungen oder Erweiterungen an bestehender Software sind im Bild unten aufgeführt. Die einzelnen Softwareteile sind in den folgenden Kapiteln detailierter beschrieben und erläutert. Hier ist bloss eine Übersicht gegeben.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{SoftwareOverview.png}
+	\caption{System Software Overview}
+\end{figure}
+
+\subsubsection{Raspian auf Raspberry Pi}
+Der einfachste Weg um einen Desktop als Ausgabe zu haben, ist die Raspian Desktop Distribution für das Raspberry Pi zu verwenden. In diesem Projekt wird die aktuellste Version von Raspian Stretch vom 13. November 2018 verwendet, welche die Kernelversion 4.14 beinhaltet.
+
+\subsubsection{MagicMirror\textsuperscript{2}}
+Das MagicMirror\textsuperscript{2} kann direkt von GIT geklont werden. Die Möglichkeit besteht, dies direkt vom Raspberry Pi zu machen. Um aber das Projekt nicht direkt auf dem Raspberry Pi konfigurieren zu müssen besteht die Variante mittels Kopiervorgängen über das Netzwerk einzelne Konfigurationsinhalte auf dem Laptop anzupassen und anschliessend auf das Raspberry Pi zu kopieren. Durch die grosse Community des Projekts ergibt sich ungefähr monatlich ein neues Stablerelease, was einfach mit \textit{git pull} upgedatet werden kann.
+
+\subsubsection{MQTT Broker}
+Auf dem Raspberry Pi wird der wohl bekannteste MQTT Broker verwendet. Namentlich der Mosquitto Broker. Die Installation ist sehr einfach und kann über den üblichen Paketmanager abgehandelt werden. 
+
+\subsubsection{Node Red}
+Node Red wird verwendet, um den externen Infrarot Präsenzmelder in das System zu integrieren und auf dessen publifizierte Nachrichten zu agieren. Der Dienst ist erreichbar im Netzwerk unter dem Port 1880. Das heisst mit \textit{http://magicmirror:1880} wird der Dienst erreicht und dessen Verhalten kann geändert werden. Dabei ist "magicmirror" der Netzwerkname vom Raspberry Pi.
+
+\subsubsection{Android Applikation}
+Die Entwicklung einer Android Applikation ist am besten unterstützt mit dem Android-Studio. Dabei engt man die Unterstützung auf Android Geräte ein, was jedoch in diesem Projekt kein Problem ist.
+
+\subsubsection{ESP-IDF Programm}
+
 
 \newpage
 
