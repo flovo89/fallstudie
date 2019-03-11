@@ -139,7 +139,7 @@
 \tableofcontents
 \newpage
 
-\printglossaries
+\printglossary[type=main,style=long,nonumberlist]
 \newpage
 
 
@@ -465,7 +465,7 @@ Die Funktionalität des Apps ist überschaubar. Um trotzdem eine gewisse Flexibili
 Ein zusätzliches Feature für den Magic Mirror ist die Spracherkennung. Nötig dazu ist bloss ein Mikrophon. Um den Magic Mirror anzuweisen Musik zu spielen, soll ebenfalls ein Lautsprecher eingebunden werden. Da mit dem Raspberry Pi 3 die Unterstützung für Bluetooth vorhanden ist, kann sogar ein Bluetooth-Lautsprecher verwendet werden.
 
 \subsection{Evaluation}
-Als Mikrophon wird ein Low-cost \Gls{usb} Mikrophon von Rondaful verwendet, welches in untenstehendem Bild gezeigt ist.
+Als Mikrophon wird ein low-cost \Gls{usb} Mikrophon von Rondaful verwendet, welches in untenstehendem Bild gezeigt ist.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.2\textwidth]{UsbMicrophone.png}
@@ -477,12 +477,28 @@ Als Bluetooth-Lautsprecher wird ein etwas teureres Gerät verwendet, nämlich der 
 	\includegraphics[width=0.4\textwidth]{JblCharge3.png}
 	\caption{Bluetooth Speaker JBL Charge 3}
 \end{figure}
+Mit diesen beiden Geräten kann evaluiert werden, inwiefern der Google Assistant sinnvol verwendet werden kann im Magic Mirror. Punkte die untersucht werden während der Evaluation:
+\begin{itemize}
+	\item Mögliche Distanz um Sprachbefehle zu senden.
+	\item Qualität der Musikausgabe.
+\end{itemize}
+
+\subsection{Musikausgabe}
+Mit den Tools \textit{PulseAudio} und \textit{BluetoothCtl} kann der Lautsprecher mit dem Raspberry Pi verbunden werden um anschliessend ein Soundfile abzuspielen.
+\\Das Resultat dieses Tests war positiv. Die Qualität ist vergleichbar mit jeder anderen Verbindung zu diesem Bluetooth-Speaker.
+
+\subsection{Mikrophon Spracheingabe}
+Die Einrichtung des Mikrophones am Raspberry Pi ist sehr einfach. Plug-and-Play ist ein guter Beschrieb dazu. Die Qualität der aufgezeichneten Sprache war jedoch sehr negativ. Mit dem Befehl
+\vspace{0.2cm}\\
+\textit{arecord -D plughw:1,0 -d 3 test.wav \&\& aplay test.wav}\vspace{0.2cm}
+\\kann eine Aufnahme von drei Sekunden gemacht werden und wird anschliessend gleich abgespielt (hier über den 3.5mm Audio Ausgang). 
+\\Der Test hat gezeigt, dass bei einer Entfernung von > 1 Meter die Qualität kaum mehr verständlich ist. Bei < 1 Meter versteht man zumindest noch Sprache. Jedoch ist dieses Resultat eine klare Aussage gegen dieses Feature der Spracheingabe für den Magic Mirror.
+\\Der wahrscheinlichste Grund für diese schlechte Qualität ist das günstige Mikrophon. Jedoch ist es nicht mehr im Bereich dieser Semesterarbeit weitere Untersuchungen in diesem Bereich zu tätigen.
 
 \newpage
 
-\printbibliography
-
 \listoffigures
 
+\printbibliography
 
 \end{document}          

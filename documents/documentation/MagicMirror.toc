@@ -74,3 +74,7 @@
 \contentsline {section}{\numberline {8}Google Assistant}{24}{section.8}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {8.1}Evaluation}{24}{subsection.8.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.2}Musikausgabe}{24}{subsection.8.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.3}Mikrophon Spracheingabe}{25}{subsection.8.3}
