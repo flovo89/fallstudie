@@ -17,6 +17,26 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{ESP-IDF:2019:Online}{online}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={Espressif},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E1}
+    \strng{fullhash}{E1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{title}{Espressif IoT Development Framework}
+    \verb{url}
+    \verb https://docs.espressif.com/projects/esp-idf/en/latest/
+    \endverb
+    \field{year}{2019}
+  \endentry
+
   \entry{MagicMirror:2019:Online}{online}{}
     \name{author}{1}{}{%
       {{hash=MT}{%
