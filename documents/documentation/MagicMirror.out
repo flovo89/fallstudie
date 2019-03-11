@@ -26,5 +26,12 @@
 \BOOKMARK [2][-]{subsection.5.1}{Aufsetzen von MagicMirror2}{section.5}% 26
 \BOOKMARK [2][-]{subsection.5.2}{Integration node-red und mqtt}{section.5}% 27
 \BOOKMARK [2][-]{subsection.5.3}{Implementation eigenes MagicMirror2 Modul}{section.5}% 28
-\BOOKMARK [1][-]{section.6}{Applikation für Präsenzdetektion}{}% 29
-\BOOKMARK [1][-]{section.7}{Android Applikation für Notizen}{}% 30
+\BOOKMARK [2][-]{subsection.5.4}{Anpassen der Anzeigeelemente auf dem Magic Mirror}{section.5}% 29
+\BOOKMARK [1][-]{section.6}{Applikation für Präsenzdetektion}{}% 30
+\BOOKMARK [2][-]{subsection.6.1}{Framework Übersicht}{section.6}% 31
+\BOOKMARK [2][-]{subsection.6.2}{Ablauf des Programmes}{section.6}% 32
+\BOOKMARK [1][-]{section.7}{Android Applikation für Notizen}{}% 33
+\BOOKMARK [2][-]{subsection.7.1}{App Bedienung}{section.7}% 34
+\BOOKMARK [2][-]{subsection.7.2}{App Programmierung}{section.7}% 35
+\BOOKMARK [1][-]{section.8}{Google Assistant}{}% 36
+\BOOKMARK [2][-]{subsection.8.1}{Evaluation}{section.8}% 37

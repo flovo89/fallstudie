@@ -1,62 +1,76 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {ngerman}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}Einführung}{4}{section.1}
+\contentsline {section}{\numberline {1}Einführung}{6}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Zielsetzung}{5}{section.2}
+\contentsline {section}{\numberline {2}Zielsetzung}{7}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Ausgangslage}{6}{section.3}
+\contentsline {section}{\numberline {3}Ausgangslage}{8}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Bewertungskriterien \Gls {opensource} Projekt}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}Bewertungskriterien \Gls {opensource} Projekt}{8}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.1}Modularität und Erweiterbarkeit}{6}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Modularität und Erweiterbarkeit}{8}{subsubsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.2}Einarbeitungszeit}{7}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.2}Einarbeitungszeit}{9}{subsubsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.1.3}Hardwareeinsatz}{7}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.3}Hardwareeinsatz}{9}{subsubsection.3.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Designentscheid}{7}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}Designentscheid}{9}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Aufbau}{8}{section.4}
+\contentsline {section}{\numberline {4}Aufbau}{10}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Auswahl Hardware}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.1}Auswahl Hardware}{10}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.1}Bildschirm}{9}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Bildschirm}{11}{subsubsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.2}Hauptrechner}{9}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.2}Hauptrechner}{11}{subsubsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.3}Infrarot Präsenzmelder}{10}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.3}Infrarot Präsenzmelder}{12}{subsubsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.4}Hilfsrechner}{10}{subsubsection.4.1.4}
+\contentsline {subsubsection}{\numberline {4.1.4}Hilfsrechner}{12}{subsubsection.4.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.5}\Gls {wlan} Router}{11}{subsubsection.4.1.5}
+\contentsline {subsubsection}{\numberline {4.1.5}\Gls {wlan} Router}{12}{subsubsection.4.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.6}Laptop}{11}{subsubsection.4.1.6}
+\contentsline {subsubsection}{\numberline {4.1.6}Laptop}{13}{subsubsection.4.1.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.7}Handy}{11}{subsubsection.4.1.7}
+\contentsline {subsubsection}{\numberline {4.1.7}Handy}{13}{subsubsection.4.1.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Auswahl Software}{11}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.2}Auswahl Software}{13}{subsection.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.1}Raspian auf Raspberry Pi}{12}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.1}Raspian auf Raspberry Pi}{14}{subsubsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.2}MagicMirror\textsuperscript {2}}{12}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.2}MagicMirror\textsuperscript {2}}{14}{subsubsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.3}MQTT Broker}{12}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.3}MQTT Broker}{14}{subsubsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.4}\Gls {node-red}}{12}{subsubsection.4.2.4}
+\contentsline {subsubsection}{\numberline {4.2.4}\Gls {node-red}}{14}{subsubsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.5}Android Applikation}{12}{subsubsection.4.2.5}
+\contentsline {subsubsection}{\numberline {4.2.5}Android Applikation}{14}{subsubsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.6}ESP-IDF Programm}{12}{subsubsection.4.2.6}
+\contentsline {subsubsection}{\numberline {4.2.6}ESP-IDF Programm}{14}{subsubsection.4.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Magic Mirror auf dem Raspberry Pi}{13}{section.5}
+\contentsline {section}{\numberline {5}Magic Mirror auf dem Raspberry Pi}{15}{section.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Aufsetzen von MagicMirror\textsuperscript {2}}{13}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.1}Aufsetzen von MagicMirror\textsuperscript {2}}{15}{subsection.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Integration \Gls {node-red} und \Gls {mqtt}}{14}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.2}Integration \Gls {node-red} und \Gls {mqtt}}{16}{subsection.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Implementation eigenes MagicMirror\textsuperscript {2} Modul}{15}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.3}Implementation eigenes MagicMirror\textsuperscript {2} Modul}{17}{subsection.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Applikation für Präsenzdetektion}{15}{section.6}
+\contentsline {subsection}{\numberline {5.4}Anpassen der Anzeigeelemente auf dem Magic Mirror}{19}{subsection.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Android Applikation für Notizen}{15}{section.7}
+\contentsline {section}{\numberline {6}Applikation für Präsenzdetektion}{20}{section.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1}Framework Übersicht}{20}{subsection.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2}Ablauf des Programmes}{21}{subsection.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Android Applikation für Notizen}{22}{section.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.1}App Bedienung}{22}{subsection.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2}App Programmierung}{23}{subsection.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}Google Assistant}{24}{section.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.1}Evaluation}{24}{subsection.8.1}

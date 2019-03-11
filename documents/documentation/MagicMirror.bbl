@@ -59,6 +59,26 @@
     \field{year}{2019}
   \endentry
 
+  \entry{MMM-Memo:2019:Online}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={Schnibel},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S1}
+    \strng{fullhash}{S1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Notes Modul für den MagicMirror}
+    \verb{url}
+    \verb https://github.com/schnibel/MMM-Memo
+    \endverb
+    \field{year}{2019}
+  \endentry
+
   \entry{MagicMirrorModules:2019:Online}{online}{}
     \name{author}{1}{}{%
       {{hash=V}{%

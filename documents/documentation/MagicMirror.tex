@@ -7,8 +7,11 @@
 \usepackage[]{inputenc}
 \usepackage[T1]{fontenc}
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{glossaries}
+
+% for code listing
+\usepackage{listings}
 
 \usepackage{graphicx}
 \graphicspath{ {./Pictures/} }
@@ -90,6 +93,40 @@
 {
 	name=URL,
 	description={Uniform resource locator, Identifikation und Lokalisation einer bestimmten Ressource}
+}
+\newglossaryentry{rest-api}
+{
+	name=Rest API,
+	description={Representional state transfer für Application programing interface}
+}
+\newglossaryentry{json}
+{
+	name=JSON,
+	description={JavaScript Object Notation, kompaktes Datenformat in einer einfachen lesbaren Textform}
+}
+\newglossaryentry{http}{
+	name=HTTP,
+	description={Hypertext transfer protocol, zustandsloses Protokoll zur Übertragung von Daten}
+}
+\newglossaryentry{dmips}{
+	name=DMIPS,
+	description={Dhyrostone mega instructions pro second, Angabe der Instruktionen pro Sekunde eines Prozessorkerns}
+}
+\newglossaryentry{usb}{
+	name=USB,
+	description={Universal serial bus, häufig benutzter serieller Bus für Datenübertragung, beispielsweise von Speicherchips}
+}
+\newglossaryentry{jtag}{
+	name=JTAG,
+	description={Joint Test Action Group, Standard zum Testen und Debuggen von integrierten Schaltungen}
+}
+\newglossaryentry{openocd}{
+	name=OpenOCD,
+	description={Open on-chip debugger, wird verwendet über Hardwareadapter für beispielsweise Debugging von Controllern}
+}
+\newglossaryentry{qos}{
+	name=QOS,
+	description={Levels für MQTT Übertragung: 0 $\rightarrow$ nur einmal, 1 $\rightarrow$ mindestens einmal, 2 $\rightarrow$ genau einmal}
 }
 
 \begin{document}
@@ -211,7 +248,7 @@ Wie in der Zielsetzung erwähnt, soll der Magic Mirror möglichst Energieeffizient
 
 \subsubsection{Hilfsrechner}
 Um den erwähnten Puls vom Infrarot Präsenzmelder zu verarbeiten und einen Befehl an den Magic Mirror zu senden, muss noch eine weitere Recheneinheit vorhanden sein. Natürlich könnte auch das Raspberry Pi diese Aufgabe übernehmen. Jedoch müsste dann der Präsenzmelder direkt über ein Kabel verbunden sein mit dem Magic Mirror. Dies ist nicht wünschenswert, da der Präsenzmelder entfernt vom Magic Mirror aufgestellt soll, um Bewegungen im Raum zu erkennen bevor der Betrachter den Magic Mirror sieht. Damit bleibt genügend Zeit um den Bildschirm zu starten und der Betrachter findet den aktiven Magic Mirror vor.
-\\Diese Aufgabe der Verarbeitung von einem Puls erfordert keine aufwändigen Berechnungen. Wichtig ist aber, dass der Hilfsrechner eine Möglichkeit hat ins Netzwerk zu kommen um mit dem Magic Mirror zu kommunizieren. Der ESP32 erfüllt diese Anforderung sehr gut, da er einen \Gls{wlan} Chip integriert. Weiter ist das Board sehr kostengünstig erwerbbar. 
+\\Diese Aufgabe der Verarbeitung von einem Puls erfordert keine aufwändigen Berechnungen. Wichtig ist aber, dass der Hilfsrechner eine Möglichkeit hat ins Netzwerk zu kommen um mit dem Magic Mirror zu kommunizieren. Der ESP32 erfüllt diese Anforderung sehr gut, da er einen \Gls{wlan} Chip integriert. Weiter ist das Board sehr kostengünstig erwerbbar. Es handelt sich um einen Chip mit zwei Kernen und 600 \Gls{dmips}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.2\textwidth]{Esp32.png}
@@ -311,19 +348,141 @@ Der dargestellte Ablauf ist nicht komplex. Links ist mit dem \textit{IrSensor} d
 \vspace{0.2cm}
 
 \subsection{Implementation eigenes MagicMirror\textsuperscript{2} Modul}
+Auf dem Magic Mirror sollen mittels einer Android Applikation Notizen geschrieben und gelesen werden können. Beim Durchsuchen nach einem passenden Modul welches dies bereits anbietet ist folgendes hervorgekommen: \textit{MMM-Memo} \cite{MMM-Memo:2019:Online}.
+\\Jedoch erfüllt die Implementation dieses Modules noch nicht alle Anforderungen, welche sind:  
+\begin{itemize}
+	\item \Gls{rest-api} wird angeboten als Schnittstelle zum Modul.
+	\item Mehrere Notizgruppen könne hinzugefügt werden. Hier gewünscht sind \textit{TODO} und \textit{Shopping}.
+	\item Ansprechend gestaltbar.
+\end{itemize}
+Der erste Punkt wird nicht unterstützt. Das Modul erwartet neue Notizen als Teil der \Gls{url}, als Beispiel um Brot auf die Shoppingliste zu schreiben müsste folgender Zugriff gemacht werden:
+\vspace{0.2cm}\\
+\textit{http://magicmirror:8080/AddMemo?memoTitle=SHOPPING\&item=Brot\&level=INFO}\vspace{0.2cm}
+\\Um es dann wieder zu entfernen, braucht es folgenden Aufruf:\vspace{0.2cm}\\
+\textit{http://magicmirror:8080/DisplayMemo?memoTitle=SHOPPING\&item=1}
+\vspace{0.2cm}\\
+Dabei muss die Übersicht über die einzelnen Notizen behalten werden, da sie jeweils nur noch über deren Index (siehe 1 für Brot) angesprochen werden können. Dies soll nicht Aufgabe der Android Applikation sein.
+\\Die Lösung um dies zu Umgehen ist die Implementation einer \Gls{rest-api}, welche jeweils den kompletten Satz an Notizen zurückliefert oder überschreibt. Folgende Zugriffe werden implementiert:
+\vspace{0.2cm}\\
+To get all notes: \textit{http://magicmirror:8080/GetCompleteNote}\\
+To write all notes:
+\textit{http://magicmirror:8080/AddCompleteNote}\\
+To delete all notes:
+\textit{http://magicmirror:8080/DeleteAllNotes}
+\vspace{0.2cm}
+\\Die Notizen werden als \Gls{json} übertragen. Dabei werden \Gls{http}-Get Befehle für die Zugriffe \textit{GetCompleteNote} und \textit{DeleteAllNotes} verwendet und ein \Gls{http}-Post Befehl für den Befehl \textit{AddCompleteNote} mit dem \Gls{json}-Objekt im Body. Das \Gls{json}-Objekt sieht wie folgt aus:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{JsonExample.png}
+	\caption{\Gls{json} Beispiel}
+\end{figure}
+\\Die einzelnen Notizen werden in einem Array abgelegt. Beim aufgeführten Beispiel werden Brot und Salat zur Gruppe \textit{Shopping} und die Aufgabe Wohnung putzen zur Gruppe \textit{TODO} hinzugefügt.
+\\
+\\Die nötigen Erweiterungen an dem Modul belaufen sich auf ein einzelnes JavaScript-File, wo zusätzliche Behandlungen gemacht werden müssen, je nach dem welche Anfrage kommt. Dabei werden die bisherigen (wo die ganze Information in der \textit{url} vorhanden ist), weiter unterstützt.
 
+\newpage
+\subsection{Anpassen der Anzeigeelemente auf dem Magic Mirror}
+Diese Anpassungen können sehr einfach behandelt werden. Beim Starten des MagicMirror\textsuperscript{2} wird eine Konfigurationsdatei gelesen, welche alle Daten über die zu ladenden Module beinhaltet. Es handelt sich um folgende Datei:
+\vspace{0.2cm}\\
+\textit{/home/pi/MagicMirror/config/config.js}\vspace{0.2cm}
+\\Die einzelnen Module werden darin als \Gls{json}-Objekte beschrieben.
+Alle verwendeten Module sind im untenstehenden Bild aufgeführt:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{MagicMirrorScreenshot.png}
+	\caption{Magic Mirror Screenshot mit allen Modulen}
+\end{figure}
 
-
-
+\newpage
 \section{Applikation für Präsenzdetektion}
+\subsection{Framework Übersicht}
+Mit dem Framework von Espressif \cite{ESP-IDF:2019:Online} ist eine sehr umfängliche Basis gegeben, um Funktionalitäten auf dem ESP32 Microcontroller zu programmieren. Neben Zugriffen auf die Peripherien des Controllers, sind verschiedene Protokolle im Framework integriert, FreeRTOS kann eingebunden werden, wie auch ein Monitoring Dienst, der als Ausgabekonsole verwendet werden kann. Als Übersicht das Bild:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{EspressifOverview.png}
+	\caption{ESP32 Framework Übersicht}
+\end{figure}
+\\Zudem hat das Entwicklungsboard direkt einen eingebauten \Gls{usb}-\Gls{jtag} Adapter, wie auch eine \Gls{openocd} Debugschnittstelle.
 
+\newpage
+\subsection{Ablauf des Programmes}
+Der schrittweise Ablauf des Programmes ist in folgendem Diagramm dargestellt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ESP32Sequence.png}
+	\caption{ESP32 Softwareablauf}
+\end{figure}
+\\Als Beispiel wird der C-Code aufgeführt, um eine Detektion des Infrarot Präsenzmelders mittels \Gls{mqtt} zu publizieren:
+\begin{lstlisting}
+char buf[20];
+strcpy(buf, "irsensor on"); 
+esp_mqtt_client_publish(client, TOPIC_PATH_SENSOR, buf, 0, 0, 0);
+\end{lstlisting}
+Dabei ist die Funktion \textit{esp\char`_mqtt\char`_client\char`_publish} Teil des Frameworks und erwartet als Übergabeparameter ein Handle vom initialisierten \Gls{mqtt}-Client, das Topic (in dem Fall \textit{/topic/magicmirror/irsensor}), die Daten (\textit{irsensor on}), die Länge der Daten (falls kein String gesendet wird), die \Gls{qos} (hier nur einmal) und ein Flag ob die Nachricht bei einem neuen Subscriber gleich vom Broker gesendet werden soll (hier nicht eingeschaltet).
+
+\newpage
 \section{Android Applikation für Notizen}
+Die Aufgabe der mobilen Android Applikation ist das bedienen der beschriebenen \Gls{rest-api} Schnittstelle des Magic Mirrors um Notizen zu senden und zu verwalten. Wie erwähnt wird die Applikation mit Hilfe von Android-Studio entwickelt. 
 
+\subsection{App Bedienung}
+Der Benutzer muss einfach zwischen den verschiedenen Notizgruppen navigieren können. Wünschenswert ist dies mit einer Wischbewegung zu machen, da es intuitiv ist. Android-Studio bietet bereits solche Projekte als Einstiegspunkt an. Als Grundlage hat das sogenannte \textit{Tabbed Activity} gedient, was bereits seitliche Scrollingeffekte mit einer Actionbar integriert. 
+\\Die finale Applikation kann somit zwischen den verschiedenen Notizgruppen mit links und rechts Wischen wechseln. Siehe untenstehendes Bild für die Veranschaulichung.
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		\includegraphics[scale=0.12]{AppTodos.png}
+		\caption{App TODOs}
+	\end{minipage}
+	%\hfill
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		\includegraphics[scale=0.12]{AppShopping.png}
+		\caption{App Shopping}
+	\end{minipage}
+\end{figure}
+\\Die drei ersichtlichen Buttons haben folgende Funktionen, aufgeführt auch von oben nach unten:
+\begin{itemize}
+	\item Download von Magic Mirror $\rightarrow$ Aktualisiert Notizen auf der App mit den Notizen auf dem Magic Mirror.
+	\item Upload auf Magic Mirror $\rightarrow$ Aktualisiert die Notizen vom Magic Mirror mit den angepassten Notizen auf der App.
+	\item Printscreen $\rightarrow$ Speichert lokal einen Printscreen der aktuellen Ansicht, um Notizen auch ausserhalb des Heimnetzes zur Verfügung zu haben.
+\end{itemize}
 
+\newpage
+\subsection{App Programmierung}
+Die Funktionalität des Apps ist überschaubar. Um trotzdem eine gewisse Flexibilität zu erreichen wurde die Software folgendermassen aufgebaut.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{AppClassDiagram.png}
+	\caption{Klassendiagramm Android App}
+\end{figure}
+\\Sehr auffällig ist dabei die doppelte Verwendung eines Interfaces auf verschiedenen Ebenen. Jedoch definiert das Interface \textit{IReceptionNotifier} eine Callback-Funktion, die einen String als Argument beinhaltet. Dies wird auf beiden Ebenen benötigt. 
+\\Die Kommunikation mit dem Magic Mirror geschieht in den untersten Netzwerk Klassen (\textit{NetworkGet} und \textit{NetworkPost}). Diese werden jeweils von einem eigenen Backgroundtask gehandelt, sobald eine Netzwerkkommunikation erwartet wird. Dies um nicht die Benutzereingaben auf dem Userinterface zu behindern.
+\\Eine Ebene darüber, bei der \textit{Communication} Klasse wird das Parsen von den \Gls{json} Objekten durchgeführt, um dann eine Liste mit Strings an die \textit{MainActivity} weiterzuleiten. Diese Liste wird dann dem Benutzer angezeigt.
+
+\newpage
+\section{Google Assistant}
+Ein zusätzliches Feature für den Magic Mirror ist die Spracherkennung. Nötig dazu ist bloss ein Mikrophon. Um den Magic Mirror anzuweisen Musik zu spielen, soll ebenfalls ein Lautsprecher eingebunden werden. Da mit dem Raspberry Pi 3 die Unterstützung für Bluetooth vorhanden ist, kann sogar ein Bluetooth-Lautsprecher verwendet werden.
+
+\subsection{Evaluation}
+Als Mikrophon wird ein Low-cost \Gls{usb} Mikrophon von Rondaful verwendet, welches in untenstehendem Bild gezeigt ist.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.2\textwidth]{UsbMicrophone.png}
+	\caption{\Gls{usb} Mikrophon}
+\end{figure}
+Als Bluetooth-Lautsprecher wird ein etwas teureres Gerät verwendet, nämlich der protable Bluetooth-Speaker Charge 3 von JBL.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{JblCharge3.png}
+	\caption{Bluetooth Speaker JBL Charge 3}
+\end{figure}
 
 \newpage
 
 \printbibliography
+
+\listoffigures
 
 
 \end{document}          
