@@ -1,0 +1,17 @@
+*.acn
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.lof
+*.log
+*.out
+*.pdf
+*.xml
+*.gz
+*.toc
