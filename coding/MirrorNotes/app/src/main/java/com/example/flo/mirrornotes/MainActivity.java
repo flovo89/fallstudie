@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements  IReceptionNotifi
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.menu_main, menu);
-        //TODO: could be removed completely
         return true;
     }
 

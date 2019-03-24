@@ -128,6 +128,10 @@
 	name=QOS,
 	description={Levels für MQTT Übertragung: 0 $\rightarrow$ nur einmal, 1 $\rightarrow$ mindestens einmal, 2 $\rightarrow$ genau einmal}
 }
+\newglossaryentry{ssh}{
+	name=SSH,
+	description={Secure Shell ist ein Netzwerkprotokoll für verschlüsselte Netzwerkkommunikation}
+}
 
 \begin{document}
 	
@@ -140,8 +144,23 @@
 \newpage
 
 \printglossary[type=main,style=long,nonumberlist]
+
 \newpage
 
+\section{Management Summary}
+Diese Projektarbeit hat das Ziel einen Magic Mirror zu konzipieren, zu erstellen und dessen Aufbau zu beschreiben.
+\\\\Verschiedene Vorschläge kursieren im Internet über den Aufbau eines Magic Mirrors. Richtig etabliert hat sich jedoch nur ein \Gls{opensource} Projekt. Durch Verwendung davon können auch weitere Forderungen an das Projekt, wie zum Beispiel Energie zu sparen, abgedeckt werden. Gezielte Erweiterungen des Projekts durch Verwendung bekannter Kommunikationsprotokolle wie \Gls{http} und \Gls{mqtt} ermöglichen zahlreiche Zusatzoptionen. Durch Interaktion mit einer Android Applikation kann die Bedienung des Magic Mirrors ausgelagert werden.  
+\\\\Die Umsetzung beginnt mit dem Inbetriebnehmen der Hardware, wobei ein Raspberry Pi 3 verwendet wird, und dem Aufsetzen des genannten \Gls{opensource} Projekts. Nächster Schritt ist die Einbindung der Energiesparmassnahme mit einem externen Infrarot Sensor gesteuert von einem Controller-Board mit integriertem \Gls{wlan} Chip. Durch Verwendung von \Gls{node-red} kann das Verhalten dieser Komponente korrekt genutzt werden und alle gesendeten \Gls{mqtt} Nachrichten können verarbeitet werden. Danach kommt die Integration der Android Applikation um Notizen auf dem Magic Mirror zu verwalten. Die Kommunikation zwischen der Android Applikation und dem Magic Mirror findet über eine \Gls{rest-api} statt. Zuletzt wird die Machbarkeit des Google-Assistants auf dem Raspberry Pi des Magic Mirrors getestet, wo jedoch die aufgenommene Sprachqualität ungenügend ist.
+\\\\Folgende Punkte werden somit schrittweise erläutert:
+\begin{itemize}
+	\item Inbetriebnahme \Gls{opensource} Projekt.
+	\item Inbetriebnahme und Aufsetzen der Software für den externen ESP32 Controller und Interaktion mit \Gls{node-red}.
+	\item Erstellen einer Android Applikation und Benutzung der \Gls{rest-api}.
+	\item Versuch der Integration des Google-Assistants.
+\end{itemize}
+
+
+\newpage
 
 \section{Einführung}
 Ein Magic Mirror ist ein optisch ansprechendes Anzeigegerät. Es handelt sich um ein Spiegel mit integriertem Bildschirm, wobei es sich bei dem Spiegel um einen sogenannten Spionspiegel handelt. Er ist von einer Seite möglichst reflektierend und von der anderen Seite möglichst durchlässig.
@@ -206,7 +225,7 @@ Anhand der Bewertung aus den vorangehenden Kapiteln fällt der Entscheid klar zu 
 \newpage
 
 \section{Aufbau}
-Unter einem Kapitel mit dem Namen Aufbau können mehrere Erwartungshaltungen zutreffen. Zum einen sicherlich der Aufbau des Magic Mirrors aus Sicht der verwendeten Materialien und Baugruppen. Zum anderen, und das ist für diese Semesterarbeit das Relevante, der Aufbau der Software und deren Zusammenspiel mit der Hardware. Um jedoch das erstgenannte nicht komplett aussenvor zu lassen, hier ein Sinnbild wie der Magic Mirror aufgebaut wird. Darauf zu sehen ist der benötigte Bildschirm, das Spionglas und ein Rahmen.
+Unter einem Kapitel mit dem Namen Aufbau können mehrere Erwartungshaltungen zutreffen. Zum einen sicherlich der Aufbau des Magic Mirrors aus Sicht der verwendeten Materialien und Baugruppen. Zum anderen, und das ist für diese Semesterarbeit das Relevante, der Aufbau der Software und deren Zusammenspiel mit der Hardware. Um jedoch das Erstgenannte nicht komplett aussenvor zu lassen, hier ein Sinnbild wie der Magic Mirror aufgebaut wird. Darauf zu sehen ist der benötigte Bildschirm, das Spionglas und ein Rahmen.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{MagicMirror_Building.png}
@@ -259,7 +278,7 @@ Um den erwähnten Puls vom Infrarot Präsenzmelder zu verarbeiten und einen Befehl
 Die Kommunikation soll in einem Heimnetz funktionieren, wobei eine Verbindung zum Internet bestehen muss, um alle Funktionalitäten des Magic Mirrors ausschöpfen zu können. Da beispielsweise der Infrarot Präsenzmelder nicht kabelgebunden installiert werden soll, muss ein wireless Netz vorhanden sein, sprich \Gls{wlan}. Es kann auch ein Hotspot von einem mobilen Gerät erstellt werden um das Netz herzustellen. Der Magic Mirror, wie auch der Infrarot Präsenzmelder verbinden sich jedoch auf eine fix eingestellte \Gls{ssid}.
 
 \subsubsection{Laptop}
-Der Laptop im System wird verwendet um Konfigurationen des Magic Mirror zu ändern. Der Vorgang ist so, dass eine SSH Verbindung zum Raspberry Pi aufgebaut wird, wo die Konfiguration angepasst werden kann.
+Der Laptop im System wird verwendet um Konfigurationen des Magic Mirror zu ändern. Der Vorgang ist so, dass eine \Gls{ssh} Verbindung zum Raspberry Pi aufgebaut wird, wo die Konfiguration angepasst werden kann.
 
 \subsubsection{Handy}
 Eine Android Applikation wird gebaut, um mit dem Magic Mirror interagieren zu können. Mindestens die Version Android Kitkat 4.4 wird dafür benötigt. Dies ist bei Geräten neuer als 2013 standardmässig gegeben und dadurch wird eine grosse Unterstützung erreicht.
@@ -282,7 +301,7 @@ Das MagicMirror\textsuperscript{2} kann direkt von GIT geklont werden. Die Mögli
 Auf dem Raspberry Pi wird der wohl bekannteste MQTT Broker verwendet. Namentlich der Mosquitto Broker. Die Installation ist sehr einfach und kann über den üblichen Paketmanager abgehandelt werden. 
 
 \subsubsection{\Gls{node-red}}
-\Gls{node-red} wird verwendet, um den externen Infrarot Präsenzmelder in das System zu integrieren und auf dessen publifizierte Nachrichten zu agieren. Der Dienst ist erreichbar im Netzwerk unter dem Port 1880. Das heisst mit \textit{http://magicmirror:1880} wird der Dienst erreicht und dessen Verhalten kann geändert werden. Dabei ist "magicmirror" der Netzwerkname vom Raspberry Pi.
+\Gls{node-red} wird verwendet, um den externen Infrarot Präsenzmelder in das System zu integrieren und auf dessen publifizierte Nachrichten zu reagieren. Der Dienst ist erreichbar im Netzwerk unter dem Port 1880. Das heisst mit \textit{http://magicmirror:1880} wird der Dienst erreicht und dessen Verhalten kann geändert werden. Dabei ist "magicmirror" der Netzwerkname vom Raspberry Pi.
 
 \subsubsection{Android Applikation}
 Die Entwicklung einer Android Applikation ist am besten unterstützt mit dem Android-Studio. Dabei engt man die Unterstützung auf Android Geräte ein, was jedoch in diesem Projekt kein Problem ist.
@@ -477,7 +496,7 @@ Als Mikrophon wird ein low-cost \Gls{usb} Mikrophon von \textit{Rondaful} verwen
 	\includegraphics[width=0.4\textwidth]{JblCharge3.png}
 	\caption{Bluetooth Speaker JBL Charge 3}
 \end{figure}
-Mit diesen beiden Geräten kann evaluiert werden, inwiefern der Google Assistant sinnvol verwendet werden kann im Magic Mirror. Punkte die untersucht werden während der Evaluation:
+\\Mit diesen beiden Geräten kann evaluiert werden, inwiefern der Google Assistant sinnvoll verwendet werden kann im Magic Mirror. Punkte die untersucht werden während der Evaluation:
 \begin{itemize}
 	\item Mögliche Distanz um Sprachbefehle zu senden.
 	\item Qualität der Musikausgabe.
@@ -493,7 +512,7 @@ Die Einrichtung des Mikrophones am Raspberry Pi ist sehr einfach. Plug-and-Play 
 \textit{arecord -D plughw:1,0 -d 3 test.wav \&\& aplay test.wav}\vspace{0.2cm}
 \\kann eine Aufnahme von drei Sekunden gemacht werden und wird anschliessend gleich abgespielt (hier über den 3.5mm Audio Ausgang). 
 \\Der Test hat gezeigt, dass bei einer Entfernung von > 1 Meter die Qualität kaum mehr verständlich ist. Bei < 1 Meter versteht man zumindest noch Sprache. Jedoch ist dieses Resultat eine klare Aussage gegen dieses Feature der Spracheingabe für den Magic Mirror.
-\\Der wahrscheinlichste Grund für diese schlechte Qualität ist das günstige Mikrophon. Jedoch ist es nicht mehr im Bereich dieser Semesterarbeit weitere Untersuchungen in diesem Bereich zu tätigen.
+\\Der wahrscheinlichste Grund für diese schlechte Qualität ist das günstige Mikrophon. Jedoch ist es nicht im Inhalt dieser Semesterarbeit weitere Untersuchungen in diesem Bereich zu tätigen.
 
 \newpage
 

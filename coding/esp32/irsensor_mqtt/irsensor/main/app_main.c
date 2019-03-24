@@ -167,10 +167,8 @@ static void mqtt_app_start(void)
 {
     	const esp_mqtt_client_config_t mqtt_cfg = 
 	{
-        	// .uri = "mqtt://iot.eclipse.org",
 		.uri = "mqtt://magicmirror",
         	.event_handle = mqtt_event_handler,
-        	// .user_context = (void *)your_context
     	};
 
     	esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);

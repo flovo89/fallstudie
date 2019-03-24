@@ -35,7 +35,7 @@ public class NetworkPost extends AsyncTask<String, Void, Void> {
             writer.write(data);
             writer.flush();
             writer.close();
-            out.flush();
+         //   out.flush();
             out.close();
 
             conn.connect();
